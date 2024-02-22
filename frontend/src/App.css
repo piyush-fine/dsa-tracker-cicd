@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.homepage_bg {
+    background: url("../src/assets/purple-blob-background.svg");
+    background-size: 100% auto;
+    
+}
+
+.landingpage_bg{
+    background: url("../src/assets/landing_background.svg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
