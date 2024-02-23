@@ -20,6 +20,7 @@ pipeline {
                 dir('frontend'){
                     script {
                         echo 'Build & Push Frontend Docker Image'
+                        sh "whoami"
                         sh "docker build -t upwarpiyush/dsa-tracker-frontend:${BUILD_NUMBER} ."
                         sh "docker push upwarpiyush/dsa-tracker-frontend:${BUILD_NUMBER}"
                     }
