@@ -66,7 +66,7 @@ pipeline {
                         echo 'Current server-deployment.yaml content:'
                         sh 'cat server-deployment.yaml'
                         
-                        sh "sed -i '' 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml"
+                        sh "sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml"
                         
                         echo 'Updated server-deployment.yaml content:'
                         sh 'cat server-deployment.yaml'
