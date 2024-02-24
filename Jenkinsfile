@@ -57,7 +57,8 @@ pipeline {
                         echo 'Current frontend-deployment.yaml content:'
                         sh 'cat frontend-deployment.yaml'
                         
-                        sh "sed -i '' 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml"
+                        sh "sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml"
+
                         
                         echo 'Updated frontend-deployment.yaml content:'
                         sh 'cat frontend-deployment.yaml'
