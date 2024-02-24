@@ -45,7 +45,7 @@ pipeline {
         stage('Checkout K8S Manifest SCM') {
             steps {
                 git credentialsId: 'github_cred', 
-                url: 'https://github.com/piyush-fine/dsa-tracker-manifest',
+                url: 'https://github.com/piyush-fine/dsa-tracker-manifest.git',
                 branch: 'master'
             }
         }
