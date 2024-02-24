@@ -55,7 +55,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         echo 'Current frontend-deployment.yaml content:'
-                        sh 'cat frotend-deployment.yaml'
+                        sh 'cat frontend-deployment.yaml'
                         
                         sh "sed -i '' 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml"
                         
