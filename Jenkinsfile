@@ -55,8 +55,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         
-                        sh 'git config --global user.email "piyush.upwar@fineshift.com"'
-                        sh 'git config --global user.name "piyush-fine"'
+                        sh 'git config --global user.name "${GIT_USERNAME}"'
+                        sh 'git config --global user.password "${GIT_PASSWORD}"'
                         
                         echo 'Current frontend-deployment.yaml content:'
                         sh 'cat frontend-deployment.yaml'
