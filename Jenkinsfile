@@ -53,7 +53,7 @@ pipeline {
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([gitUsernamePassword(credentialsId: 'github_cred', gitToolName: 'Default')])  {
                         sh '''
                         git config --list
                         sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml
