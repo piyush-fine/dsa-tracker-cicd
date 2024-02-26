@@ -74,7 +74,9 @@ pipeline {
                         sh "git commit -m 'Updated the deployment yaml | Jenkins Pipeline'"
                         sh 'git push -u origin master'
                     }
-        }        
+            }
+        }
+    }        
 }
 
 
