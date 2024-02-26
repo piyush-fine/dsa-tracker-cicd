@@ -50,30 +50,22 @@ pipeline {
             }
         }
 
-        stage('Update K8S Manifest & Push to Repo') {
+        stage('Update K8S manifest & push to Repo'){
             steps {
-                script {
-                        echo 'Current frontend-deployment.yaml content:'
-                        sh 'cat frontend-deployment.yaml'
-                        
-                        sh "sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml"
-
-                        
-                        echo 'Updated frontend-deployment.yaml content:'
-                        sh 'cat frontend-deployment.yaml'
-
-                        echo 'Current server-deployment.yaml content:'
-                        sh 'cat server-deployment.yaml'
-                        
-                        sh "sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml"
-                        
-                        echo 'Updated server-deployment.yaml content:'
-                        sh 'cat server-deployment.yaml'
-                        
-                        sh 'git add frontend-deployment.yaml server-deployment.yaml'
-                        sh "git commit -m 'Updated the deployment yaml | Jenkins Pipeline'"
-                        sh 'git push -u origin master'
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh '''
+                        sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml
+                        echo 'Updated frontend-deployment.yaml'
+                        sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml
+                        echo 'Updated server-deployment.yaml'
+                        git add frontend-deployment.yaml server-deployment.yaml
+                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git remote -v
+                        git push https://github.com/piyush-fine/dsa-tracker-manifest.git HEAD:master
+                        '''                        
                     }
+                }
             }
         }
     }        
