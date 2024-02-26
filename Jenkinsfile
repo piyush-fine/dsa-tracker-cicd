@@ -55,6 +55,7 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
+                        git config --list
                         sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml
                         echo 'Updated frontend-deployment.yaml'
                         sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml
