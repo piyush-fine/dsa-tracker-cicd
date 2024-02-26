@@ -54,17 +54,26 @@ pipeline {
             steps {
                 script{
                     withCredentials([gitUsernamePassword(credentialsId: 'github_cred', gitToolName: 'Default')])  {
-                        sh '''
-                        git config --list
-                        sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml
-                        echo 'Updated frontend-deployment.yaml'
-                        sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml
-                        echo 'Updated server-deployment.yaml'
-                        git add frontend-deployment.yaml server-deployment.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipelines'
-                        git remote -v
-                        git push -u origin master
-                        '''                        
+                        echo 'Current frontend-deployment.yaml content:'
+                        sh 'cat frontend-deployment.yaml'
+                        
+                        sh "sed -i 's/dsa-tracker-frontend:[^ ]*/dsa-tracker-frontend:${BUILD_NUMBER}/g' frontend-deployment.yaml"
+
+                        
+                        echo 'Updated frontend-deployment.yaml content:'
+                        sh 'cat frontend-deployment.yaml'
+
+                        echo 'Current server-deployment.yaml content:'
+                        sh 'cat server-deployment.yaml'
+                        
+                        sh "sed -i 's/dsa-tracker-sever:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml"
+                        
+                        echo 'Updated server-deployment.yaml content:'
+                        sh 'cat server-deployment.yaml'
+                        
+                        sh 'git add frontend-deployment.yaml server-deployment.yaml'
+                        sh "git commit -m 'Updated the deployment yaml | Jenkins Pipeline'"
+                        sh 'git push -u origin master'                   
                     }
                 }
             }
@@ -96,7 +105,7 @@ pipeline {
 //                         echo 'Current server-deployment.yaml content:'
 //                         sh 'cat server-deployment.yaml'
                         
-//                         sh "sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml"
+//                         sh "sed -i 's/dsa-tracker-sever:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml"
                         
 //                         echo 'Updated server-deployment.yaml content:'
 //                         sh 'cat server-deployment.yaml'
