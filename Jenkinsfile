@@ -60,7 +60,7 @@ pipeline {
                         sed -i 's/dsa-tracker-server:[^ ]*/dsa-tracker-server:${BUILD_NUMBER}/g' server-deployment.yaml
                         echo 'Updated server-deployment.yaml'
                         git add frontend-deployment.yaml server-deployment.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git commit -m 'Updated the deploy yaml | Jenkins Pipelines'
                         git remote -v
                         git push https://github.com/piyush-fine/dsa-tracker-manifest.git HEAD:master
                         '''                        
