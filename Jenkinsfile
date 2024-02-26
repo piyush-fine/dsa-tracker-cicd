@@ -63,7 +63,7 @@ pipeline {
                         git add frontend-deployment.yaml server-deployment.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipelines'
                         git remote -v
-                        git push https://github.com/piyush-fine/dsa-tracker-manifest.git HEAD:master
+                        git push -u origin master
                         '''                        
                     }
                 }
