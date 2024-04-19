@@ -22,7 +22,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]){
                             echo 'Build & Push Frontend Docker Image'
                             sh "docker build -t upwarpiyush/dsa-tracker-frontend:${BUILD_NUMBER} ."
-                            sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                            // sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
                             sh "docker push upwarpiyush/dsa-tracker-frontend:${BUILD_NUMBER}"
                         }
                     }
